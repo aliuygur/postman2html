@@ -1,0 +1,10 @@
+#!/usr/bin/env php
+<?php
+require_once __DIR__ . "/../vendor/autoload.php";
+
+use Alioygur\Postman2HTML\RenderCommand;
+use Symfony\Component\Console\Application;
+
+$application = new Application("Postman collection to html", "1.0");
+$application->add(new RenderCommand());
+$application->run();
