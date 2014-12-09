@@ -12,17 +12,17 @@ class RenderCommand extends Command
     {
         $this->setName('render')
             ->setDescription('convert postman collection to html')
-            ->addArgument('file', InputArgument::REQUIRED, 'location of postman collection file')
-            ->addOption('output', 'o', InputOption::VALUE_OPTIONAL, 'location of output file', 'output.html');
+            ->addArgument('inputfile', InputArgument::REQUIRED, 'input file')
+            ->addArgument('outputfile', InputArgument::OPTIONAL, 'output file', 'output.html');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $collectionFile = new CollectionFile($input->getArgument('file'));
+        $collectionFile = new CollectionFile($input->getArgument('inputfile'));
 
-        file_put_contents($input->getOption('output'), $collectionFile->render());
+        file_put_contents($input->getArgument('outputfile'), $collectionFile->render());
 
-        $filePath = realpath($input->getOption('output'));
+        $filePath = realpath($input->getArgument('outputfile'));
 
         $output->writeln("<info>The output file is created at, {$filePath}</info>");
     }
